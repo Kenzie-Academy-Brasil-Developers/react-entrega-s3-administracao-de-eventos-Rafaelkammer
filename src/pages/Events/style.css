@@ -1,0 +1,22 @@
+ul {
+  list-style: none;
+}
+
+li button {
+  text-align: center;
+  font-size: 18px;
+  margin: 10px;
+  padding: 25px;
+  width: 200px;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+li button:hover {
+  cursor: pointer;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
