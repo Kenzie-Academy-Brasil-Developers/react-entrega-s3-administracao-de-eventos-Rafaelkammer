@@ -1,18 +1,23 @@
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import "./style.css";
 
-const Product = ({
-  produto: {
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { useAddTo } from "../../Providers/AddTo";
+import { useRemoveFrom } from "../../Providers/RemoveFrom";
+
+const Product = ({ produto, isRemovable = false }) => {
+  const {
     id,
     image_url,
     name,
     first_brewed,
     description,
     volume: { value, unit },
-  },
-  isRemovable = false,
-}) => {
+  } = produto;
+
+  const { setAddTo } = useAddTo();
+  const { setRemoveFrom } = useRemoveFrom();
+
   return (
     <div className="card">
       <div>
@@ -26,20 +31,21 @@ const Product = ({
       <p>{description}</p>
       <p>First brewed: {first_brewed}</p>
       {isRemovable ? (
-        <Button
-          variant="contained"
-          color="inherit"
-          // onClick={() => dispatch(addToCartThunk(product))}
-        >
-          Remove
-        </Button>
-      ) : (
-        <Link key={id} to={`/add/${id}`}>
+        <Link key={id} to={`/remove`}>
           <Button
             variant="contained"
             color="inherit"
-
-            // onClick={() => dispatch(removeFromCartThunk(id))}
+            onClick={() => setRemoveFrom(produto)}
+          >
+            Remove
+          </Button>
+        </Link>
+      ) : (
+        <Link key={id} to={`/add`}>
+          <Button
+            variant="contained"
+            color="inherit"
+            onClick={() => setAddTo(produto)}
           >
             Add to event
           </Button>

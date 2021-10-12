@@ -8,11 +8,6 @@ const Events = () => {
 
   return (
     <ul>
-      <li>
-        {/* <Link> */}
-        <button>New Event</button>
-        {/* </Link> */}
-      </li>
       {events.map((evento) => {
         return (
           <li key={evento.name}>

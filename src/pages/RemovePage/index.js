@@ -1,22 +1,22 @@
 import { useEvents } from "../../Providers/Events";
 import { Link } from "react-router-dom";
-import { useAddTo } from "../../Providers/AddTo";
+import { useRemoveFrom } from "../../Providers/RemoveFrom";
 
-const AddPage = () => {
+const RemovePage = () => {
   const { events } = useEvents();
-  const { addTo, setAddTo } = useAddTo();
+  const { removeFrom, setRemoveFrom } = useRemoveFrom();
 
   const handleAdd = (evento) => {
     const event = events.find((element) => element.name === evento.name);
-    if (!event.drinkList.find((element) => element === addTo)) {
-      event.drinkList = [...event.drinkList, addTo];
-      setAddTo({});
-    }
+    event.drinkList = event.drinkList.filter((element) => {
+      return element.id !== removeFrom.id;
+    });
+    setRemoveFrom({});
   };
 
   return (
     <ul>
-      <h1>Add to:</h1>
+      <h1>Remove from:</h1>
       {events.map((evento) => {
         return (
           <li key={evento.name}>
@@ -29,4 +29,4 @@ const AddPage = () => {
     </ul>
   );
 };
-export default AddPage;
+export default RemovePage;

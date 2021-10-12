@@ -10,20 +10,22 @@ const Event = () => {
   const event = events.find((evento) => evento.name === name);
 
   return (
-    <div className="eventcontainer">
-      <h3>Event details:</h3>
+    <>
+      <div>
+        <h3>Event details:</h3>
 
-      <h1>{event.name}</h1>
-
-      {event.drinkList.length > 0 &&
-        event.drinkList.map((drink) => {
-          return <Product key={drink.id} produto={drink} />;
-        })}
-
+        <h1>{event.name}</h1>
+        <div className="container">
+          {event.drinkList.length > 0 &&
+            event.drinkList.map((drink) => {
+              return <Product key={drink.id} produto={drink} isRemovable />;
+            })}
+        </div>
+      </div>
       <Link to="/events">
-        <button>Voltar</button>
+        <button>Back</button>
       </Link>
-    </div>
+    </>
   );
 };
 export default Event;
